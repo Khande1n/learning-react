@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        console.log('[App.js] constructor');
+    }
+
     state = {
         persons: [
             { id:'1', name: 'Nikhil', age: 32 },
@@ -10,6 +17,11 @@ class App extends Component {
             { id:'3', name: 'Nandini', age: 2}
         ],
         showPerson: false
+    }
+
+    static getDerivedStateFromProps(props, state) {
+        console.log('[App.js] getDerivedStateFromProps', props);
+        return state;
     }
 
     switchNameHandler = (newName) => {
@@ -49,25 +61,24 @@ class App extends Component {
         this.setState({ showPerson: !doesShow});
     }
     render() {
+        console.log('[App.js] render');
+
         let persons = null
-        let btnClass = '';
 
         if (this.state.showPerson) {
-            persons = (
-                <div>
-                    <Persons
-                        persons={this.state.persons}
-                        clicked={this.deletePersonHandler}
-                        changed={this.nameChangedHandler}/>
-                </div>
-            )
-            btnClass = classes.Red;
+            persons = <Persons
+                    persons={this.state.persons}
+                    clicked={this.deletePersonHandler}
+                    changed={this.nameChangedHandler}/> ;
         }
 
         return (
-
             <div className={classes.App}>
-                <cockpit />
+                <Cockpit
+                    title={this.props.appTitle}
+                    showPerson={this.state.showPerson}
+                    persons={this.state.persons}
+                    clicked={this.togglePersonHandler}/>
                 {persons}
             </div>
 
