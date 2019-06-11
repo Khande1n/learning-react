@@ -1,0 +1,24 @@
+.NavigationItem {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.NavigationItem a {
+    height: 100%;
+    color: white;
+    text-decoration: none;
+    padding: 16px 10px;
+    border-bottom: 4px solid transparent;
+    display: block;
+}
+
+.Navigation a:hover,
+.Navigation a:active,
+.Navigation a.active {
+    background-color: #8F5C2C;
+    border-bottom: 4px solid #40A4C8;
+    color: white;
+}
